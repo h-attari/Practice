@@ -1,7 +1,6 @@
 class Solution:
     def containsNearbyDuplicate(self, nums: List[int], k: int) -> bool:
-        nums_len = len(nums)
-        if nums_len == len(set(nums)):
+        if len(nums) == len(set(nums)):
             return False
         nums_queue = list()
         queue_max_len = k + 1
