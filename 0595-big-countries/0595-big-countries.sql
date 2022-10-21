@@ -1,8 +1,8 @@
 # Write your MySQL query statement below
-select
+SELECT
 name, area, population
-from World
-having
+FROM World
+WHERE
 area >= 3000000
-or
+OR
 population >= 25000000;
