@@ -1,6 +1,6 @@
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-        anagram_dict = dict()
+        anagram_dict = {}
         for string in strs:
             temp = "".join(sorted(string))
             if temp in anagram_dict.keys():
