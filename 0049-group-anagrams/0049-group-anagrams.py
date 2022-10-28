@@ -7,8 +7,5 @@ class Solution:
                 anagram_dict[temp].append(string)
             else:
                 anagram_dict[temp] = [string]
-        result = list()
-        for key, value in anagram_dict.items():
-            result.append(value)
-        return result
+        return list(anagram_dict.values())
         
