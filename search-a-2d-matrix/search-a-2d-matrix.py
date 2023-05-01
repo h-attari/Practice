@@ -2,9 +2,6 @@ def find_row(matrix: List[List[int]], target: int) -> int:
     first, last = 0, len(matrix)-1
     while first <= last:
         mid = (first + last) // 2
-        if len(matrix[mid]) == 1:
-            if matrix[mid][0] == target:
-                return mid
         if matrix[mid][0] <= target:
             if matrix[mid][-1] >= target:
                 return mid
