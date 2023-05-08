@@ -1,18 +1,17 @@
 class Solution:
     def isValid(self, s: str) -> bool:
         stack = []
-        for x in s:
-            if x in ("(", "[", "{"):
-                stack.append(x)
+        for bracket in s:
+            if bracket in ("(", "{", "["):
+                stack.append(bracket)
+                continue
+            if bracket in (")", "}", "]") and stack == []:
+                return False
+            if bracket == ")":
+                if stack[-1] != "(":
+                    return False
             else:
-                if not stack:
+                if ord(bracket)-2 != ord(stack[-1]):
                     return False
-                if x == ")" and stack[-1] == "(":
-                    stack.pop(-1)
-                elif x == "]" and stack[-1] == "[":
-                    stack.pop(-1)
-                elif x == "}" and stack[-1] == "{":
-                    stack.pop(-1)
-                else:
-                    return False
-        return stack == []
+            stack.pop(-1)
+        return stack == [] 
