@@ -8,13 +8,9 @@ class Solution:
         slow = fast = head
         for _ in range(k-1):
             fast = fast.next
-        temp = fast.val
+        temp_node = fast
         while fast.next is not None:
             slow = slow.next
             fast = fast.next
-        temp, slow.val = slow.val, temp
-        fast = head
-        for _ in range(k-1):
-            fast = fast.next
-        fast.val = temp
+        temp_node.val, slow.val = slow.val, temp_node.val
         return head
