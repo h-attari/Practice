@@ -5,8 +5,8 @@ class Solution:
         while index < min(len(word1), len(word2)):
             result += (word1[index] + word2[index])
             index += 1
-        if index < len(word1):
+        if len(word2) < len(word1):
             result += word1[index:]
-        elif index < len(word2):
+        elif len(word2) > len(word1):
             result += word2[index:]
         return result
