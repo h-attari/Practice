@@ -1,9 +1,9 @@
 class Solution:
     def kthGrammar(self, n: int, k: int) -> int:
-        if n==1: 
-            return 0
-        mid=math.pow(2,n-1)//2
-        if k<=mid:
-            return self.kthGrammar(n-1,k) # The Kth bit will be same as parent level when k<=mid
-        else:
-            return 1-self.kthGrammar(n-1,k-mid) #The Kth bit will be opposite as parent level when k<=mid
+        k, n = k-1, n-1
+        def get_answer(row, col):
+            if col == 0: return 0
+            if col%2 == 0: return get_answer(row-1, col//2)
+            else: return 1 - get_answer(row-1, col//2)
+        result = get_answer(n, k)
+        return result
