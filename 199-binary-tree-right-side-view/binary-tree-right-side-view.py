@@ -8,15 +8,13 @@ class Solution:
     def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
         if root is None: return []
         temp_queue = [root]
-        level_order = []
+        result = []
         while temp_queue != []:
-            temp = []
+            result.append(temp_queue[0].val)
             level_count = len(temp_queue)
             for _ in range(level_count):
                 node = temp_queue.pop(0)
-                temp.append(node.val)
-                if node.left is not None: temp_queue.append(node.left)
                 if node.right is not None: temp_queue.append(node.right)
-            level_order.append(temp)
-        return [level[-1] for level in level_order]
+                if node.left is not None: temp_queue.append(node.left)
+        return result
         
