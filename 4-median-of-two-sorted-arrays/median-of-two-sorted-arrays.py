@@ -1,26 +1,31 @@
 class Solution:
     def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
+
+        # Since one of the arrays can be significantly longer than
+        # the other, we always perform binary search on the shorter
+        # array to ensure that the time complexity remains
+        # O(log(min(m, n))).
         if len(nums1) > len(nums2):
-            nums1, nums2 = nums2, nums1
-        
-        m, n = len(nums1), len(nums2)
-        low, high = 0, m
-        
-        while low <= high:
-            partitionX = (low + high) // 2
-            partitionY = (m + n + 1) // 2 - partitionX
-            
-            maxX = float('-inf') if partitionX == 0 else nums1[partitionX - 1]
-            maxY = float('-inf') if partitionY == 0 else nums2[partitionY - 1]
-            minX = float('inf') if partitionX == m else nums1[partitionX]
-            minY = float('inf') if partitionY == n else nums2[partitionY]
-            
-            if maxX <= minY and maxY <= minX:
-                if (m + n) % 2 == 0:
-                    return (max(maxX, maxY) + min(minX, minY)) / 2
+            return self.findMedianSortedArrays(nums2, nums1)
+
+        len1, len2 = len(nums1), len(nums2)
+        left, right = 0, len1
+
+        while left <= right:
+            part1 = (left + right) // 2
+            part2 = (len1 + len2 + 1) // 2 - part1
+
+            max_left1 = float('-inf') if part1 == 0 else nums1[part1 - 1]
+            min_right1 = float('inf') if part1 == len1 else nums1[part1]
+            max_left2 = float('-inf') if part2 == 0 else nums2[part2 - 1]
+            min_right2 = float('inf') if part2 == len2 else nums2[part2]
+
+            if max_left1 <= min_right2 and max_left2 <= min_right1:
+                if (len1 + len2) % 2 == 0:
+                    return (max(max_left1, max_left2) + min(min_right1, min_right2)) / 2
                 else:
-                    return max(maxX, maxY)
-            elif maxX > minY:
-                high = partitionX - 1
+                    return max(max_left1, max_left2)
+            elif max_left1 > min_right2:
+                right = part1 - 1
             else:
-                low = partitionX + 1
+                left = part1 + 1
