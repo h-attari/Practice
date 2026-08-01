@@ -1,5 +1,5 @@
 class Solution:
-    def PredictTheWinner(self, nums: List[int]) -> bool:
+    def predictTheWinner(self, nums: List[int]) -> bool:
         n=len(nums)
         @lru_cache(None)
         def dp(i,j):
